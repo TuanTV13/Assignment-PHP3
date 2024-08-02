@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreNewsRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'news' => 'array|required_array_keys:title,views,description',
+
+            'news.title' => 'required',
+            'news.views' => 'required|integer|min:0',
+            'news.image' => 'nullable|image|max:2048',
+            'news.description' => 'nullable',
+            'news.created_at' => now(),
+
+            'categories' => 'array|required_array_keys:id',
+            'categories.id' => 'required',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'news.title' => 'title',
+            'news.views' => 'views',
+            'news.description' => 'description',
+
+            'categories.id' => 'category name',
+        ];
+    }
+}
