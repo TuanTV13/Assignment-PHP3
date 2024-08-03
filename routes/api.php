@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\NewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('news', NewController::class);
+
+Route::get('news/category/{id}', [NewController::class, 'NewByCategory']);
