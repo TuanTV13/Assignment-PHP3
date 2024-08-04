@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Category;
 use App\Models\News;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -14,14 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Category::class)->constrained();
             $table->foreignIdFor(User::class)->constrained();
-            $table->string('title', 255);
-            $table->integer('views')->default(0);
-            $table->string('image')->nullable();
-            $table->text('description')->nullable();
+            $table->foreignIdFor(News::class)->constrained();
+            $table->text('content');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('news');
+        Schema::dropIfExists('comments');
     }
 };

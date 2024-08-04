@@ -61,15 +61,15 @@
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarForms2" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarForms2">
-                        <i class="ri-file-list-3-line"></i> <span>Tác giả</span>
+                        <i class="ri-file-list-3-line"></i> <span>Người dùng</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarForms2">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('users.index') }}" class="nav-link">Danh sách tác giả</a>
+                                <a href="{{ route('users.index') }}" class="nav-link">Danh sách </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('users.create') }}" class="nav-link">Thêm mới tác giả</a>
+                                <a href="{{ route('users.create') }}" class="nav-link">Thêm mới </a>
                             </li>
                         </ul>
                     </div>

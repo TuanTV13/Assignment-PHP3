@@ -20,13 +20,25 @@ class NewsController extends Controller
     }
 
     public function index()
-    {
-        $categories = Category::query()->get();
+{
+    // Lấy danh mục
+    $categories = Category::query()->get();
 
-        $news = News::with('category')->paginate(10);
+    // Lấy người dùng hiện tại
+    $user = auth()->user();
 
-        return view('admins.news.index', compact('news', 'categories'));
+    // Lọc bài viết theo vai trò của người dùng
+    if ($user->type == 'admin') {
+        // Admin có thể xem tất cả các bài viết
+        $news = News::with('category', 'user')->paginate(10);
+    } else {
+        // Người dùng khác chỉ có thể xem bài viết của họ
+        $news = News::with('category', 'user')->where('user_id', $user->id)->paginate(10);
     }
+
+    return view('admins.news.index', compact('news', 'categories'));
+}
+
 
     public function filter(Request $request, News $news)
     {

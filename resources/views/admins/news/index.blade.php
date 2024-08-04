@@ -68,6 +68,7 @@
                                         <th data-sort="image">Image</th>
                                         <th data-sort="views">Views</th>
                                         <th data-sort="category">Category</th>
+                                        <th data-sort="auth">Author</th>
                                         <th data-sort="action">Action</th>
                                     </tr>
                                 </thead>
@@ -86,6 +87,7 @@
                                             @else
                                                 <td class="category">{{ $new->category_name }}</td>
                                             @endif
+                                            <td class="title">{{ $new->user->name }}</td>
                                             <td>
                                                 <div class="d-flex gap-2">
                                                     <a href="{{ route('news.edit', $new) }}"

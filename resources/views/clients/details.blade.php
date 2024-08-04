@@ -29,7 +29,7 @@
                             <li class="list-inline-item">
                                 <a href="author-single.html" class="card-meta-author">
                                     <img src="/themes/clients/images/john-doe.jpg" alt="No image"> 
-                                    <span>TuanTV</span>
+                                    <span>{{ $news->user->name }}</span>
                                 </a>
                             </li>
                             <li class="list-inline-item">

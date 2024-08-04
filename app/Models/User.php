@@ -20,12 +20,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
         'type',
     ];
 
     const TYPE_ADMIN = 'admin';
     const TYPE_MEMBER = 'member';
+    const TYPE_AUTH = 'auth';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -50,5 +52,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isAdmin()
     {
         return $this->type === self::TYPE_ADMIN;
+    }
+
+    public function isAuth()
+    {
+        return $this->type === self::TYPE_AUTH;
     }
 }

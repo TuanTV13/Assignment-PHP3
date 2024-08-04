@@ -63,7 +63,7 @@ class HomeController extends Controller
     {
         $categories = Category::all();
 
-        $news = News::query()
+        $news = News::with('user')
             ->where('id', $id)
             ->first();
         

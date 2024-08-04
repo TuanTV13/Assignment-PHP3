@@ -14,7 +14,7 @@
                     <h4 class="card-title mb-0">Thêm tin tức mới</h4>
                 </div><!-- end card header -->
 
-                {{-- @if ($errors->any())
+                @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
@@ -22,7 +22,7 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif --}}
+                @endif
 
                 <div class="card-body">
                     <form action="{{ route('news.store') }}" method="post" enctype="multipart/form-data">
@@ -81,6 +81,7 @@
                             <label for="description" class="form-label">Description</label>
                             <textarea class="form-control" id="description" name="news[description]" rows="5">{{old('news.description')}}</textarea>
                         </div>
+                        <input type="hidden" name="news[user_id]" value="{{ Auth::user()->id }}">
 
                         <button type="submit" class="btn btn-primary mt-3">Save</button>
                     </form><!-- end form -->
