@@ -82,12 +82,18 @@
                                                 <img height="100px" width="100px" src="{{ \Storage::url($new->image) }}" alt="Loading...">
                                             </td>
                                             <td class="views">{{ $new->views }}</td>
+                                            
                                             @if ($new->category)
                                                 <td class="category">{{ $new->category->name }}</td>
                                             @else
                                                 <td class="category">{{ $new->category_name }}</td>
                                             @endif
-                                            <td class="title">{{ $new->user->name }}</td>
+
+                                            @if ($new->authname)
+                                                <td class="auth">{{ $new->authname }}</td>
+                                            @else
+                                                <td class="category">{{ $new->user->name }}</td>
+                                            @endif
                                             <td>
                                                 <div class="d-flex gap-2">
                                                     <a href="{{ route('news.edit', $new) }}"

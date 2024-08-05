@@ -58,6 +58,8 @@
                     </div>
                 </li>
 
+                @if (Auth::user()->type === \App\Models\User::TYPE_ADMIN)
+
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarForms2" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarForms2">
@@ -75,6 +77,8 @@
                     </div>
                 </li>
 
+                @endif
+                
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarForms3" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarForms3">

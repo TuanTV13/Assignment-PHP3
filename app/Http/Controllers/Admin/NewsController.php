@@ -20,32 +20,31 @@ class NewsController extends Controller
     }
 
     public function index()
-{
-    // Lấy danh mục
-    $categories = Category::query()->get();
+    {
+        $categories = Category::query()->get();
 
-    // Lấy người dùng hiện tại
-    $user = auth()->user();
+        $user = auth()->user();
 
-    // Lọc bài viết theo vai trò của người dùng
-    if ($user->type == 'admin') {
-        // Admin có thể xem tất cả các bài viết
-        $news = News::with('category', 'user')->paginate(10);
-    } else {
-        // Người dùng khác chỉ có thể xem bài viết của họ
-        $news = News::with('category', 'user')->where('user_id', $user->id)->paginate(10);
+
+        if ($user->type == 'admin') {
+
+            $news = News::with('category', 'user')->paginate(10);
+        } else {
+
+            $news = News::with('category', 'user')->where('user_id', $user->id)->paginate(10);
+        }
+
+        return view('admins.news.index', compact('news', 'categories'));
     }
-
-    return view('admins.news.index', compact('news', 'categories'));
-}
 
 
     public function filter(Request $request, News $news)
     {
 
-        $query = News::with('category')
+        $query = News::query()
             ->join('categories', 'categories.id', '=', 'news.category_id')
-            ->select('news.id', 'news.title', 'news.views', 'news.image', 'news.description', 'categories.name as category_name');
+            ->join('users', 'users.id', '=', 'news.user_id')
+            ->select('news.id', 'news.title', 'news.views', 'news.image', 'news.description', 'categories.name as category_name', 'users.name as authname');
 
         if ($request->has('category_id') && $request->category_id != '') {
             $query->where('categories.id', $request->category_id);
@@ -55,14 +54,12 @@ class NewsController extends Controller
             $query->where('news.title', 'like', '%' . $request->search . '%');
         }
 
-        // $query = News::with('category');
-        
         $news = $query->paginate(10);
 
         $categories = DB::table('categories')->get();
 
         return view('admins.news.index', compact('news', 'categories'));
-        // return redirect()->route('news.index');
+        // return redirect()->back()->with('news', 'categories');
     }
 
     /**

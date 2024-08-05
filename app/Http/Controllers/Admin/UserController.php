@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -73,9 +74,28 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        try {
+            DB::transaction(function () use ($request, $user){
+
+                $data = $request->input('users');
+
+                if (!empty($data['password'])) {
+                    
+                    $data['password'] = bcrypt($data['password']);
+                } else {
+                    unset($data['password']);
+                }
+
+                $user->update($data);
+
+            }, 3);
+            return back()->with('success', 'Thao tác thành công');
+
+        } catch (Exception $exception) {
+            return back()->with('error', $exception->getMessage());
+        }
     }
 
     /**
