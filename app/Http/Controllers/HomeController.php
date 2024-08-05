@@ -28,22 +28,22 @@ class HomeController extends Controller
 
         $categories = Category::all();
 
-        $NewsTrend = News::query()
+        $newsTrend = News::query()
             ->orderByDesc('views')
             ->limit(1)
             ->first();
 
-        $NewsRandom = News::query()
+        $newsRandom = News::query()
             ->inRandomOrder()
             ->limit(4)
             ->get();
 
-        $NewsLatest = News::query()
+        $newsLatest = News::query()
             ->orderByDesc('id')
             ->limit(3)
             ->get();
 
-        return view('welcome', compact('NewsTrend', 'NewsRandom', 'NewsLatest', 'categories'));
+        return view('welcome', compact('newsTrend', 'newsRandom', 'newsLatest', 'categories'));
     }
 
     public function newsByCategoies($id, News $news)
@@ -66,7 +66,7 @@ class HomeController extends Controller
         $news = News::with('user')
             ->where('id', $id)
             ->first();
-        
+
         $news->increment('views');
 
         return view('clients.details', compact('categories', 'news'));

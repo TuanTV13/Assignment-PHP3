@@ -23,21 +23,21 @@
                         <div class="post-slider slider-sm">
                             {{-- <img style="height: 400px; width: 100%;" src="path/to/your/image.jpg" class="card-img-top" alt="post-thumb"> --}}
                             <img class="card-img-top" style="height: 400px; width: 100%;"
-                                src="{{ \Storage::url($NewsTrend->image) }}" alt="Loading...">
+                                src="{{ \Storage::url($newsTrend->image) }}" alt="Loading...">
 
                         </div>
                         <div class="card-body">
-                            <h3 class="h4 mb-3"><a class="post-title" href="link/to/article">{{ $NewsTrend->title }}</a>
+                            <h3 class="h4 mb-3"><a class="post-title" href="link/to/article">{{ $newsTrend->title }}</a>
                             </h3>
-                            <p>{{ Str::limit($NewsTrend->description, 400, ' ...') }}</p>
-                            <a href="{{ route('details', $NewsTrend->id) }}" class="btn btn-outline-primary">Đọc thêm</a>
+                            <p>{{ Str::limit($newsTrend->description, 400, ' ...') }}</p>
+                            <a href="{{ route('details', $newsTrend->id) }}" class="btn btn-outline-primary">Đọc thêm</a>
                         </div>
                     </article>
                 </div>
 
                 <div class="col-lg-4">
                     <h2 class="h5 section-title">Bạn có thể quan tâm</h2>
-                    @foreach ($NewsRandom as $new)
+                    @foreach ($newsRandom as $new)
                         <article class="card mb-4">
                             <div class="card-body d-flex">
                                 <img class="card-img-sm" src="{{ \Storage::url($new->image) }}" alt="Loading...">
@@ -70,7 +70,7 @@
                     <h2 class="h5 section-title">Bài đăng gần đây</h2>
                     <article class="card mb-4">
                         <div class="post-slider">
-                            @foreach ($NewsLatest as $post)
+                            @foreach ($newsLatest as $post)
                                 <article class="card mb-4">
                                     <div class="post-slider">
                                         <img src="{{ \Storage::url($post->image) }}" style="height: 400px; width: 100%; class="card-img-top" alt="post-thumb">
